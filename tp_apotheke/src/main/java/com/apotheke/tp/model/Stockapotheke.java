@@ -34,9 +34,9 @@ public class Stockapotheke implements Serializable  {
 	/**
 	 * 
 	 */
-	@Column(name="QUANTITE_DISPONIBLE_PHARMACIE")
-	@JsonProperty("quantite_disponible_pharmacie")
-	private int quantiteDisponibleApotheke;
+	@Column(name="QUANTITAET_VERFUEGBARE_APOTHEKE")
+	@JsonProperty("quantitaet_verfuegbare_apotheke")
+	private int quantitaetVerfuegbareApotheke;
 
 	//bi-directional many-to-one association to Medikament
 	/**
@@ -51,7 +51,7 @@ public class Stockapotheke implements Serializable  {
 	 * 
 	 */
 	@ManyToOne
-	@JoinColumn(name="ID_PHARMACIE", insertable=false, updatable=false)
+	@JoinColumn(name="ID_APOTHEKE", insertable=false, updatable=false)
 	private Apotheke apotheke;
 	
 	/**
@@ -63,24 +63,24 @@ public class Stockapotheke implements Serializable  {
 	
 	/**
 	 * @param id Parameter
-	 * @param quantiteDisponibleApotheke Parameter
+	 * @param quantitaetVerfuegbareApotheke Parameter
 	 */
-	public Stockapotheke(StockapothekePK id, int quantiteDisponibleApotheke) {
+	public Stockapotheke(StockapothekePK id, int quantitaetVerfuegbareApotheke) {
 		super();
 		this.id = id;
-		this.quantiteDisponibleApotheke = quantiteDisponibleApotheke;
+		this.quantitaetVerfuegbareApotheke = quantitaetVerfuegbareApotheke;
 	}
 
 	/*
-	 * public Stockapotheke(int quantiteDisponibleApotheke, Medikament medikament,
+	 * public Stockapotheke(int quantitaetVerfuegbareApotheke, Medikament medikament,
 	 * Apotheke apotheke) { super();
-	 * this.quantiteDisponibleApotheke = quantiteDisponibleApotheke;
+	 * this.quantitaetVerfuegbareApotheke = quantitaetVerfuegbareApotheke;
 	 * this.medikament = medikament; this.apotheke = apotheke;
 	 * }
 	 * 
-	 * public Stockapotheke(StockapothekePK id, int quantiteDisponibleApotheke, Medikament
+	 * public Stockapotheke(StockapothekePK id, int quantitaetVerfuegbareApotheke, Medikament
 	 * medikament, Apotheke apotheke) { super(); this.id = id;
-	 * this.quantiteDisponibleApotheke = quantiteDisponibleApotheke;
+	 * this.quantitaetVerfuegbareApotheke = quantitaetVerfuegbareApotheke;
 	 * this.medikament = medikament; this.apotheke = apotheke;
 	 * }
 	 */
@@ -102,15 +102,15 @@ public class Stockapotheke implements Serializable  {
 	/**
 	 * @return Ergebnisse
 	 */
-	public int getQuantiteDisponibleApotheke() {
-		return quantiteDisponibleApotheke;
+	public int getQuantitaetVerfuegbareApotheke() {
+		return quantitaetVerfuegbareApotheke;
 	}
 
 	/**
-	 * @param quantiteDisponibleApotheke Parameter
+	 * @param quantitaetVerfuegbareApotheke Parameter
 	 */
-	public void setQuantiteDisponibleApotheke(int quantiteDisponibleApotheke) {
-		this.quantiteDisponibleApotheke = quantiteDisponibleApotheke;
+	public void setQuantitaetVerfuegbareApotheke(int quantitaetVerfuegbareApotheke) {
+		this.quantitaetVerfuegbareApotheke = quantitaetVerfuegbareApotheke;
 	}
 
 	/**

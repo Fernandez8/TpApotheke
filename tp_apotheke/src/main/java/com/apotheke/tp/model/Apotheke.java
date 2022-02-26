@@ -31,16 +31,16 @@ public class Apotheke implements Serializable  {
 	 * 
 	 */
 	@Id
-	@Column(name="ID_PHARMACIE")
+	@Column(name="ID_APOTHEKE")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@JsonProperty("id_pharmacie")
+	@JsonProperty("id_apotheke")
 	private int idApotheke;
 
 	/**
 	 * 
 	 */
-	@Column(name="NOM_PHARMACIE")
-	@JsonProperty("nom_pharmacie")
+	@Column(name="NOM_APOTHEKE")
+	@JsonProperty("nom_apotheke")
 	private String nomApotheke;
 
 	//bi-directional many-to-one association to Stockapotheke

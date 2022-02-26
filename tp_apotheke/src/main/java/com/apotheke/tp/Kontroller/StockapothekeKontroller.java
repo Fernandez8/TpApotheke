@@ -36,15 +36,15 @@ public class StockapothekeKontroller {
 	 * Methods 		Urls 																					Actions 
 	 * POST 		/api/stockapotheke 																			create new stockapotheke 
 	 * GET 			/api/stockapotheke 																			retrieve all stockapothekes 
-	 * GET 			/api/stockapotheke/{value_id_pharmacie}/{value_id_medikament} 								retrieve a stockapotheke by {value_id_pharmacie} and {value_id_medikament} 
-	 * PUT 			/api/stockapotheke/add/{value_id_pharmacie}/{value_id_medikament} 							update to add a stockapotheke by {value_id_pharmacie} and {value_id_medikament} 
-	 * PUT 			/api/stockapotheke/add 							                                            update to add a stockapotheke by {value_id_pharmacie} and {value_id_medikament} 
-	 * PUT 			/api/stockapotheke/reduce/{value_id_pharmacie}/{value_id_medikament} 						update to add a stockapotheke by {value_id_pharmacie} and {value_id_medikament} 
-	 * PUT 			/api/stockapotheke/reduce																	update to add a stockapotheke by {value_id_pharmacie} and {value_id_medikament} 
-	 * PUT 			/api/reduce/stockapotheke/{value_id_pharmacie}/{value_id_medikament} 						update to reduce a stockapotheke by {value_id_pharmacie} and {value_id_medikament} 
-	 * DELETE  		/api/stockapotheke/{value_id_pharmacie}/{value_id_medikament} 								delete a stockapotheke by {value_id_pharmacie} and {value_id_medikament} 
+	 * GET 			/api/stockapotheke/{value_id_apotheke}/{value_id_medikament} 								retrieve a stockapotheke by {value_id_apotheke} and {value_id_medikament} 
+	 * PUT 			/api/stockapotheke/add/{value_id_apotheke}/{value_id_medikament} 							update to add a stockapotheke by {value_id_apotheke} and {value_id_medikament} 
+	 * PUT 			/api/stockapotheke/add 							                                            update to add a stockapotheke by {value_id_apotheke} and {value_id_medikament} 
+	 * PUT 			/api/stockapotheke/reduce/{value_id_apotheke}/{value_id_medikament} 						update to add a stockapotheke by {value_id_apotheke} and {value_id_medikament} 
+	 * PUT 			/api/stockapotheke/reduce																	update to add a stockapotheke by {value_id_apotheke} and {value_id_medikament} 
+	 * PUT 			/api/reduce/stockapotheke/{value_id_apotheke}/{value_id_medikament} 						update to reduce a stockapotheke by {value_id_apotheke} and {value_id_medikament} 
+	 * DELETE  		/api/stockapotheke/{value_id_apotheke}/{value_id_medikament} 								delete a stockapotheke by {value_id_apotheke} and {value_id_medikament} 
 	 * DELETE 		/api/stockapotheke 																			delete all stockapothekes GET /api/stockapotheke/{field_name}/{field_value} find by any column name {field_name} in table name stockapotheke with is value {field_value} 
-	 * GET 			/api/stockapotheke?id_pharmacie={value_id_pharmacie}&id_medikament={value_id_medikament} 	find all stockapothekes which id_pharmacie contains value_id_pharmacie and id_medikament contains value_id_medikament
+	 * GET 			/api/stockapotheke?id_apotheke={value_id_apotheke}&id_medikament={value_id_medikament} 	find all stockapothekes which id_apotheke contains value_id_apotheke and id_medikament contains value_id_medikament
 	 * 
 	 ***************************************************************************************************
 	 */
@@ -53,20 +53,20 @@ public class StockapothekeKontroller {
 	StockapothekeRepository stockapothekeRepository;
 
 	/**
-	 * @param id_pharmacie Parameter
+	 * @param id_apotheke Parameter
 	 * @param id_medikament Parameter
 	 * @return Alle Apothekenbestellungen
 	 */
 	@GetMapping("/stockapotheke")
-	public ResponseEntity<List<Stockapotheke>> getAllStockapotheke(@RequestParam(required = false) Integer id_pharmacie,
+	public ResponseEntity<List<Stockapotheke>> getAllStockapotheke(@RequestParam(required = false) Integer id_apotheke,
 			@RequestParam(required = false) Integer id_medikament) {
 		try {
 			List<Stockapotheke> stockapothekes = new ArrayList<Stockapotheke>();
-			if (id_pharmacie == null && id_medikament == null)
+			if (id_apotheke == null && id_medikament == null)
 				stockapothekeRepository.findAll().forEach(stockapothekes::add);
-			else if (id_pharmacie != null && id_medikament != null)
+			else if (id_apotheke != null && id_medikament != null)
 				stockapothekes.add(stockapothekeRepository
-						.findByIdIdApothekeAndIdIdMedikament(id_pharmacie, id_medikament));
+						.findByIdIdApothekeAndIdIdMedikament(id_apotheke, id_medikament));
 			else
 				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
@@ -80,15 +80,15 @@ public class StockapothekeKontroller {
 	}
 
 	/**
-	 * @param id_pharmacie Parameter
+	 * @param id_apotheke Parameter
 	 * @param id_medikament Parameter
 	 * @return Bestellungen von Apotheken, die einer Apotheke und einem Arzneimittel entsprechen
 	 */
-	@GetMapping("/stockapotheke/{id_pharmacie}/{id_medikament}")
-	public ResponseEntity<Stockapotheke> getStockapothekeById(@PathVariable("id_pharmacie") Integer id_pharmacie,
+	@GetMapping("/stockapotheke/{id_apotheke}/{id_medikament}")
+	public ResponseEntity<Stockapotheke> getStockapothekeById(@PathVariable("id_apotheke") Integer id_apotheke,
 			@PathVariable("id_medikament") Integer id_medikament) {
 		Stockapotheke stockapotheke = stockapothekeRepository
-				.findByIdIdApothekeAndIdIdMedikament(id_pharmacie, id_medikament);
+				.findByIdIdApothekeAndIdIdMedikament(id_apotheke, id_medikament);
 		if (Objects.nonNull(stockapotheke)) {
 			return new ResponseEntity<>(stockapotheke, HttpStatus.OK);
 		} else {
@@ -106,7 +106,7 @@ public class StockapothekeKontroller {
 	public ResponseEntity<Stockapotheke> createStockapotheke(@RequestBody Stockapotheke stockapotheke) {
 		try {
 			Stockapotheke _stockapotheke = stockapothekeRepository
-					.save(new Stockapotheke(stockapotheke.getId(), stockapotheke.getQuantiteDisponibleApotheke()));
+					.save(new Stockapotheke(stockapotheke.getId(), stockapotheke.getQuantitaetVerfuegbareApotheke()));
 			return new ResponseEntity<>(_stockapotheke, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -116,29 +116,29 @@ public class StockapothekeKontroller {
 	/**
 	 * Hinzufügen der Menge einer Bestellung
 	 * 
-	 * @param id_pharmacie Parameter
+	 * @param id_apotheke Parameter
 	 * @param id_medikament Parameter
 	 * @param stockapotheke Parameter
 	 * @return Ergebnisse
 	 */
-	@PutMapping(value = {"/stockapotheke/add","/stockapotheke/add/{id_pharmacie}/{id_medikament}"})
+	@PutMapping(value = {"/stockapotheke/add","/stockapotheke/add/{id_apotheke}/{id_medikament}"})
 	public ResponseEntity<Stockapotheke> updateToAddStockapotheke(
-			@PathVariable(name = "id_pharmacie", required = false) Integer id_pharmacie,
+			@PathVariable(name = "id_apotheke", required = false) Integer id_apotheke,
 			@PathVariable(name = "id_medikament", required = false) Integer id_medikament,
 			@RequestBody Stockapotheke stockapotheke) {
 		
-		if (id_pharmacie == null && id_medikament == null) {
-			id_pharmacie = stockapotheke.getId().getIdApotheke();
+		if (id_apotheke == null && id_medikament == null) {
+			id_apotheke = stockapotheke.getId().getIdApotheke();
 			id_medikament = stockapotheke.getId().getIdMedikament();
-		}else if((id_pharmacie != null && id_medikament == null) || id_pharmacie == null && id_medikament != null) {
+		}else if((id_apotheke != null && id_medikament == null) || id_apotheke == null && id_medikament != null) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		
-		Stockapotheke _stockapotheke = stockapothekeRepository.findByIdIdApothekeAndIdIdMedikament(id_pharmacie, id_medikament);
+		Stockapotheke _stockapotheke = stockapothekeRepository.findByIdIdApothekeAndIdIdMedikament(id_apotheke, id_medikament);
 		if (Objects.nonNull(_stockapotheke)) {
-			Integer new_stock = stockapotheke.getQuantiteDisponibleApotheke()
-					+ _stockapotheke.getQuantiteDisponibleApotheke(); // add new quantity
-			_stockapotheke.setQuantiteDisponibleApotheke(new_stock);
+			Integer new_stock = stockapotheke.getQuantitaetVerfuegbareApotheke()
+					+ _stockapotheke.getQuantitaetVerfuegbareApotheke(); // add new quantity
+			_stockapotheke.setQuantitaetVerfuegbareApotheke(new_stock);
 			return new ResponseEntity<>(stockapothekeRepository.save(_stockapotheke), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -148,34 +148,34 @@ public class StockapothekeKontroller {
 	/**
 	 * Reduzierung der Bestellmenge
 	 * 
-	 * @param id_pharmacie Parameter
+	 * @param id_apotheke Parameter
 	 * @param id_medikament Parameter
 	 * @param stockapotheke Parameter
 	 * @return Ergebnisse
 	 */
-	@PutMapping(value = {"/stockapotheke/reduce","/stockapotheke/reduce/{id_pharmacie}/{id_medikament}"})
+	@PutMapping(value = {"/stockapotheke/reduce","/stockapotheke/reduce/{id_apotheke}/{id_medikament}"})
 	public ResponseEntity<Stockapotheke> updateToReduceStockapotheke(
-			@PathVariable(name = "id_pharmacie", required = false) Integer id_pharmacie,
+			@PathVariable(name = "id_apotheke", required = false) Integer id_apotheke,
 			@PathVariable(name = "id_medikament", required = false) Integer id_medikament,
 			@RequestBody Stockapotheke stockapotheke) {
 		
-		if (id_pharmacie == null && id_medikament == null) {
-			id_pharmacie = stockapotheke.getId().getIdApotheke();
+		if (id_apotheke == null && id_medikament == null) {
+			id_apotheke = stockapotheke.getId().getIdApotheke();
 			id_medikament = stockapotheke.getId().getIdMedikament();
-		}else if((id_pharmacie != null && id_medikament == null) || id_pharmacie == null && id_medikament != null) {
+		}else if((id_apotheke != null && id_medikament == null) || id_apotheke == null && id_medikament != null) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		
 		Stockapotheke _stockapotheke = stockapothekeRepository
-				.findByIdIdApothekeAndIdIdMedikament(id_pharmacie, id_medikament);
+				.findByIdIdApothekeAndIdIdMedikament(id_apotheke, id_medikament);
 		if (Objects.nonNull(_stockapotheke)
-				&& _stockapotheke.getQuantiteDisponibleApotheke() >= stockapotheke.getQuantiteDisponibleApotheke()) {
-			Integer new_stock = _stockapotheke.getQuantiteDisponibleApotheke()
-					- stockapotheke.getQuantiteDisponibleApotheke(); // reduce new quantity
-			_stockapotheke.setQuantiteDisponibleApotheke(new_stock);
+				&& _stockapotheke.getQuantitaetVerfuegbareApotheke() >= stockapotheke.getQuantitaetVerfuegbareApotheke()) {
+			Integer new_stock = _stockapotheke.getQuantitaetVerfuegbareApotheke()
+					- stockapotheke.getQuantitaetVerfuegbareApotheke(); // reduce new quantity
+			_stockapotheke.setQuantitaetVerfuegbareApotheke(new_stock);
 			return new ResponseEntity<>(stockapothekeRepository.save(_stockapotheke), HttpStatus.OK);
 		} else if (Objects.nonNull(_stockapotheke)
-				&& _stockapotheke.getQuantiteDisponibleApotheke() < stockapotheke.getQuantiteDisponibleApotheke()) {
+				&& _stockapotheke.getQuantitaetVerfuegbareApotheke() < stockapotheke.getQuantitaetVerfuegbareApotheke()) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -185,15 +185,15 @@ public class StockapothekeKontroller {
 	/**
 	 * eine Bestellung löschen
 	 * 
-	 * @param id_pharmacie Parameter
+	 * @param id_apotheke Parameter
 	 * @param id_medikament Parameter
 	 * @return Ergebnisse
 	 */
-	@DeleteMapping("/stockapotheke/{id_pharmacie}/{id_medikament}")
-	public ResponseEntity<HttpStatus> deleteStockapotheke(@PathVariable("id_pharmacie") Integer id_pharmacie,
+	@DeleteMapping("/stockapotheke/{id_apotheke}/{id_medikament}")
+	public ResponseEntity<HttpStatus> deleteStockapotheke(@PathVariable("id_apotheke") Integer id_apotheke,
 			@PathVariable("id_medikament") Integer id_medikament) {
 		try {
-			stockapothekeRepository.deleteByIdIdApothekeAndIdIdMedikament(id_pharmacie,
+			stockapothekeRepository.deleteByIdIdApothekeAndIdIdMedikament(id_apotheke,
 					id_medikament);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} catch (Exception e) {
@@ -229,7 +229,7 @@ public class StockapothekeKontroller {
 		try {
 			List<Stockapotheke> stockapothekes = new ArrayList<Stockapotheke>();
 			switch (field_name.toLowerCase()) {
-			case "id_pharmacie":
+			case "id_apotheke":
 				stockapothekeRepository.findByIdIdApotheke(Integer.parseInt(field_value))
 						.forEach(stockapothekes::add);
 				break;
@@ -237,8 +237,8 @@ public class StockapothekeKontroller {
 				stockapothekeRepository.findByIdIdMedikament(Integer.parseInt(field_value))
 						.forEach(stockapothekes::add);
 				break;
-			case "quantite_disponible_pharmacie":
-				stockapothekeRepository.findByQuantiteDisponibleApotheke(Integer.parseInt(field_value))
+			case "quantitaet_verfuegbare_apotheke":
+				stockapothekeRepository.findByQuantitaetVerfuegbareApotheke(Integer.parseInt(field_value))
 						.forEach(stockapothekes::add);
 				break;
 			default:

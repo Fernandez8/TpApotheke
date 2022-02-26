@@ -13,10 +13,10 @@ import com.apotheke.tp.model.Stocklager;
 public interface StocklagerRepository extends JpaRepository<Stocklager, Integer> {
 	
 	/**
-	 * @param quantiteDisponible Parameter
+	 * @param quantitaetVerfuegbar Parameter
 	 * @return Ergebnisse
 	 */
-	List<Stocklager> findByQuantiteDisponible(Integer quantiteDisponible);
+	List<Stocklager> findByQuantitaetVerfuegbar(Integer quantitaetVerfuegbar);
 
 	/**
 	 * @param idMedikament Parameter

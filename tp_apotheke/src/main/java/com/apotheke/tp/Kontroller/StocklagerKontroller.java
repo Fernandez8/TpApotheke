@@ -110,7 +110,7 @@ public class StocklagerKontroller {
 	public ResponseEntity<Stocklager> createStocklager(@RequestBody Stocklager stocklager) {
 		try {
 			Stocklager _stocklager = stocklagerRepository
-					.save(new Stocklager(stocklager.getId(), stocklager.getQuantiteDisponible()));
+					.save(new Stocklager(stocklager.getId(), stocklager.getQuantitaetVerfuegbar()));
 			return new ResponseEntity<>(_stocklager, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -140,8 +140,8 @@ public class StocklagerKontroller {
 		
 		Stocklager _stocklager = stocklagerRepository.findByIdIdLagerAndIdIdMedikament(id_lager, id_medikament);
 		if (Objects.nonNull(_stocklager)) {
-			Integer new_stock = stocklager.getQuantiteDisponible() + _stocklager.getQuantiteDisponible(); // add new quantity
-			_stocklager.setQuantiteDisponible(new_stock);
+			Integer new_stock = stocklager.getQuantitaetVerfuegbar() + _stocklager.getQuantitaetVerfuegbar(); // add new quantity
+			_stocklager.setQuantitaetVerfuegbar(new_stock);
 			return new ResponseEntity<>(stocklagerRepository.save(_stocklager), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -170,11 +170,11 @@ public class StocklagerKontroller {
 		}
 		
 		Stocklager _stocklager = stocklagerRepository.findByIdIdLagerAndIdIdMedikament(id_lager, id_medikament);
-		if (Objects.nonNull(_stocklager) && _stocklager.getQuantiteDisponible() >= stocklager.getQuantiteDisponible()) {
-			Integer new_stock = _stocklager.getQuantiteDisponible() - stocklager.getQuantiteDisponible(); // reduce new quantity
-			_stocklager.setQuantiteDisponible(new_stock);
+		if (Objects.nonNull(_stocklager) && _stocklager.getQuantitaetVerfuegbar() >= stocklager.getQuantitaetVerfuegbar()) {
+			Integer new_stock = _stocklager.getQuantitaetVerfuegbar() - stocklager.getQuantitaetVerfuegbar(); // reduce new quantity
+			_stocklager.setQuantitaetVerfuegbar(new_stock);
 			return new ResponseEntity<>(stocklagerRepository.save(_stocklager), HttpStatus.OK);
-		}else if (Objects.nonNull(_stocklager) && _stocklager.getQuantiteDisponible() < stocklager.getQuantiteDisponible()) {
+		}else if (Objects.nonNull(_stocklager) && _stocklager.getQuantitaetVerfuegbar() < stocklager.getQuantitaetVerfuegbar()) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -233,8 +233,8 @@ public class StocklagerKontroller {
 			case "id_medikament":
 				stocklagerRepository.findByIdIdMedikament(Integer.parseInt(field_value)).forEach(stocklagers::add);
 				break;
-			case "quantite_disponible":
-				stocklagerRepository.findByQuantiteDisponible(Integer.parseInt(field_value)).forEach(stocklagers::add);
+			case "quantitaet_verfuegbare":
+				stocklagerRepository.findByQuantitaetVerfuegbar(Integer.parseInt(field_value)).forEach(stocklagers::add);
 				break;
 			default:
 				// code for default case

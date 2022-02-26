@@ -36,9 +36,9 @@ public class Stocklager implements Serializable  {
 	/**
 	 * 
 	 */
-	@Column(name="QUANTITE_DISPONIBLE")
-	@JsonProperty("quantite_disponible")
-	private int quantiteDisponible;
+	@Column(name="QUANTITAET_VERFUEGBARE")
+	@JsonProperty("quantitaet_verfuegbare")
+	private int quantitaetVerfuegbar;
 
 	//bi-directional many-to-one association to Lager
 	/**
@@ -66,21 +66,21 @@ public class Stocklager implements Serializable  {
 	
 	/**
 	 * @param id Parameter
-	 * @param quantiteDisponible Parameter
+	 * @param quantitaetVerfuegbar Parameter
 	 */
-	public Stocklager(StocklagerPK id, int quantiteDisponible) {
+	public Stocklager(StocklagerPK id, int quantitaetVerfuegbar) {
 		super();
 		this.id = id;
-		this.quantiteDisponible = quantiteDisponible;
+		this.quantitaetVerfuegbar = quantitaetVerfuegbar;
 	}
 
 	/*
-	 * public Stocklager(StocklagerPK id, int quantiteDisponible, Lager lager,
-	 * Medikament medikament) { super(); this.id = id; this.quantiteDisponible =
-	 * quantiteDisponible; this.lager = lager; this.medikament = medikament; }
+	 * public Stocklager(StocklagerPK id, int quantitaetVerfuegbar, Lager lager,
+	 * Medikament medikament) { super(); this.id = id; this.quantitaetVerfuegbar =
+	 * quantitaetVerfuegbar; this.lager = lager; this.medikament = medikament; }
 	 * 
-	 * public Stocklager(int quantiteDisponible, Lager lager, Medikament
-	 * medikament) { super(); this.quantiteDisponible = quantiteDisponible;
+	 * public Stocklager(int quantitaetVerfuegbar, Lager lager, Medikament
+	 * medikament) { super(); this.quantitaetVerfuegbar = quantitaetVerfuegbar;
 	 * this.lager = lager; this.medikament = medikament; }
 	 */
 
@@ -101,15 +101,15 @@ public class Stocklager implements Serializable  {
 	/**
 	 * @return Ergebnisse
 	 */
-	public int getQuantiteDisponible() {
-		return quantiteDisponible;
+	public int getQuantitaetVerfuegbar() {
+		return quantitaetVerfuegbar;
 	}
 
 	/**
-	 * @param quantiteDisponible Parameter
+	 * @param quantitaetVerfuegbar Parameter
 	 */
-	public void setQuantiteDisponible(int quantiteDisponible) {
-		this.quantiteDisponible = quantiteDisponible;
+	public void setQuantitaetVerfuegbar(int quantitaetVerfuegbar) {
+		this.quantitaetVerfuegbar = quantitaetVerfuegbar;
 	}
 
 	/**

@@ -25,8 +25,8 @@ public class StockapothekePK implements Serializable {
 	/**
 	 * 
 	 */
-	@Column(name="ID_PHARMACIE", insertable=false, updatable=false)
-	@JsonProperty("id_pharmacie")
+	@Column(name="ID_APOTHEKE", insertable=false, updatable=false)
+	@JsonProperty("id_apotheke")
 	private int idApotheke;
 
 	/**

@@ -25,10 +25,10 @@ public interface StockapothekeRepository extends JpaRepository<Stockapotheke, In
 	List<Stockapotheke> findByIdIdMedikament(Integer idMedikament);
 	
 	/**
-	 * @param quantiteDisponibleApotheke Parameter
+	 * @param quantitaetVerfuegbareApotheke Parameter
 	 * @return Ergebnisse
 	 */
-	List<Stockapotheke> findByQuantiteDisponibleApotheke(Integer quantiteDisponibleApotheke);
+	List<Stockapotheke> findByQuantitaetVerfuegbareApotheke(Integer quantitaetVerfuegbareApotheke);
 	
 	/**
 	 * @param idApotheke Parameter
