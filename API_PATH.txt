@@ -1,0 +1,112 @@
+
+//*************************************************
+//*******      LISTE DER API-ROUTEN    ************
+//*************************************************
+
+/*
+* ************************* Straßen für Lager *******************************
+* 
+Methods	  	Urls	           									Actions
+POST	  	/api/lager										create new lager
+GET	      	/api/lager										retrieve all lagers
+GET			/api/lager/:id									retrieve a lager by :id
+GET			/api/lager/{field_name}/{field_value}			find by any column name {field_name} in table name lager with is value {field_value}
+GET			/api/lager?id_lager={value_id_lager}	find all lagers which id_lager contains value_id_lager
+PUT			/api/lager/:id									update a lager by :id
+DELETE		/api/lager/:id									delete a lager by :id
+DELETE		/api/lager										delete all lagers
+*	
+***************************************************************************************************
+*/
+
+
+/*
+* ************************* Straßen für Apotheken *******************************
+* 
+*  Methods	  	Urls	           									Actions
+POST	  	/api/apotheke										create new apotheke
+GET	      	/api/apotheke										retrieve all apothekes
+GET			/api/apotheke/:id									retrieve a apotheke by :id
+GET			/api/apotheke/{field_name}/{field_value}			find by any column name {field_name} in table name apotheke with is value {field_value}
+GET			/api/apotheke?id_apotheke={value_id_apotheke}	find all apothekes which id_apotheke contains value_id_apotheke
+PUT			/api/apotheke/:id									update a apotheke by :id
+DELETE		/api/apotheke/:id									delete a apotheke by :id
+DELETE		/api/apotheke										delete all apothekes
+*	
+***************************************************************************************************
+*/
+
+
+/*
+* ************************* Straßen für Arzneimittelhersteller *******************************
+* 
+Methods	  	Urls	           									Actions
+POST	  	/api/fabrikant										create new fabrikant
+GET	      	/api/fabrikant										retrieve all fabrikants
+GET			/api/fabrikant/:id									retrieve a fabrikant by :id
+GET			/api/fabrikant/{field_name}/{field_value}			find by any column name {field_name} in table name fabrikant with is value {field_value}
+GET			/api/fabrikant?id_fabrikant={value_id_fabrikant}	find all fabrikants which id_fabrikant contains value_id_fabrikant
+PUT			/api/fabrikant/:id									update a fabrikant by :id
+DELETE		/api/fabrikant/:id									delete a fabrikant by :id
+DELETE		/api/fabrikant										delete all fabrikants
+*	
+***************************************************************************************************
+*/
+
+
+/*
+* ************************* Die Wege für Drogen *******************************
+* 
+*  Methods	  	Urls	           								Actions
+POST	  	/api/medikament										create new medikament
+GET	      	/api/medikament										retrieve all medikaments
+GET			/api/medikament/:id									retrieve a medikament by :id
+GET			/api/medikament/{field_name}/{field_value}			find by any column name {field_name} in table name medikament with is value {field_value}
+GET			/api/medikament?id_medikament={value_id_medikament}	find all medikaments which id_medikament contains value_id_medikament
+PUT			/api/medikament/:id									update a medikament by :id
+DELETE		/api/medikament/:id									delete a medikament by :id
+DELETE		/api/medikament										delete all medikaments
+*	
+***************************************************************************************************
+*/
+
+
+/*
+* ************************* Routen für Apothekenbestellungen *******************************
+* 
+* Methods 		Urls 																					Actions 
+* POST 			/api/stockapotheke 																			create new stockapotheke 
+* GET 			/api/stockapotheke 																			retrieve all stockapothekes 
+* GET 			/api/stockapotheke/{value_id_pharmacie}/{value_id_medikament} 								retrieve a stockapotheke by {value_id_pharmacie} and {value_id_medikament} 
+* GET			/api/stockapotheke/customfield/{field_name}/{field_value}			                        find by any column name {field_name} in table name medikament with is value {field_value}
+* GET 			/api/stockapotheke?id_pharmacie={value_id_pharmacie}&id_medikament={value_id_medikament} 	find all stockapothekes which id_pharmacie contains value_id_pharmacie and id_medikament contains value_id_medikament
+* PUT 			/api/stockapotheke/add/{value_id_pharmacie}/{value_id_medikament} 							update to add a stockapotheke by {value_id_pharmacie} and {value_id_medikament} 
+* PUT 			/api/stockapotheke/add 							                                            update to add a stockapotheke by {value_id_pharmacie} and {value_id_medikament} 
+* PUT 			/api/stockapotheke/reduce/{value_id_pharmacie}/{value_id_medikament} 						update to add a stockapotheke by {value_id_pharmacie} and {value_id_medikament} 
+* PUT 			/api/stockapotheke/reduce																	update to add a stockapotheke by {value_id_pharmacie} and {value_id_medikament} 
+* PUT 			/api/reduce/stockapotheke/{value_id_pharmacie}/{value_id_medikament} 						update to reduce a stockapotheke by {value_id_pharmacie} and {value_id_medikament} 
+* DELETE  		/api/stockapotheke/{value_id_pharmacie}/{value_id_medikament} 								delete a stockapotheke by {value_id_pharmacie} and {value_id_medikament} 
+* DELETE 		/api/stockapotheke 																			delete all stockapothekes GET /api/stockapotheke/{field_name}/{field_value} find by any column name {field_name} in table name stockapotheke with is value {field_value} 
+*
+***************************************************************************************************
+*/
+
+/*
+* ************************* Routen für Arzneimittelvorräte aus Lagern *******************************
+* 
+* Methods 		Urls 																					Actions 
+* POST 			/api/stocklager 																			create new stocklager 
+* GET 			/api/stocklager 																			retrieve all stocklagers 
+* GET 			/api/stocklager/{value_id_lager}/{value_id_medikament} 								retrieve a stocklager by {value_id_lager} and {value_id_medikament} 
+* GET			/api/stocklager/customfield/{field_name}/{field_value}			                        find by any column name {field_name} in table name medikament with is value {field_value}
+* GET 			/api/stocklager?id_lager={value_id_lager}&id_medikament={value_id_medikament} 	find all stocklagers which id_lager contains value_id_lager and id_medikament contains value_id_medikament
+* PUT 			/api/stocklager/add/{value_id_lager}/{value_id_medikament} 							update to add a stocklager by {value_id_lager} and {value_id_medikament} 
+* PUT 			/api/stocklager/add 							                                            update to add a stocklager by {value_id_lager} and {value_id_medikament} 
+* PUT 			/api/stocklager/reduce/{value_id_lager}/{value_id_medikament} 						update to add a stocklager by {value_id_lager} and {value_id_medikament} 
+* PUT 			/api/stocklager/reduce																	update to add a stocklager by {value_id_lager} and {value_id_medikament} 
+* PUT 			/api/reduce/stocklager/{value_id_lager}/{value_id_medikament} 						update to reduce a stocklager by {value_id_lager} and {value_id_medikament} 
+* DELETE  		/api/stocklager/{value_id_lager}/{value_id_medikament} 								delete a stocklager by {value_id_lager} and {value_id_medikament} 
+* DELETE 		/api/stocklager 																			delete all stocklagers GET /api/stocklager/{field_name}/{field_value} find by any column name {field_name} in table name stocklager with is value {field_value} 
+*
+***************************************************************************************************
+*/
